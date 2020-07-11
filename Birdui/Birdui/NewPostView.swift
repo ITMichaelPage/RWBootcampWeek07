@@ -50,8 +50,7 @@ struct NewPostView: View {
       .padding()
     }
     .sheet(isPresented: $imagePickerIsVisible) {
-      // TODO: Show ImagePicker
-      Text("Replace with code to show ImagePicker")
+      ImagePicker(image: self.$uiImage)
     }
   }
 }
