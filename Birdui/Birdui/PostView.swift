@@ -11,11 +11,39 @@ import SwiftUI
 struct PostView: View {
   let post: MediaPost
   
+  var dateFormatter: DateFormatter {
+    let dateFormatter = DateFormatter()
+    dateFormatter.dateFormat = "d MMM, HH:mm"
+    return dateFormatter
+  }
+  
   var body: some View {
-    // TODO: This should look exactly like Birdie's table view cell.
-    // The post text is left-aligned below the mascot image.
-    // The image, if any, is horizontally centered in the view.
-    Text("Layout the view for each post.")
+    VStack(alignment: .leading) {
+      HStack {
+        // MARK: - Profile image
+        Image("mascot_swift-badge")
+          .resizable()
+          .frame(width: 50, height: 50)
+        // MARK: - Name and timestamp
+        VStack(alignment: .leading) {
+          Text(post.userName)
+          Text("\(dateFormatter.string(from: post.timestamp))")
+        }
+      }
+      // MARK: - Post text body
+      Text(post.textBody ?? "")
+      // MARK: - Optional post image
+      if post.uiImage != nil {
+        HStack {
+          Spacer()
+          Image(uiImage: post.uiImage!)
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(width: 100, height: 100)
+          Spacer()
+        }
+      }
+    }
   }
 }
 

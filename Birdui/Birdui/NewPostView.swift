@@ -14,7 +14,7 @@ struct NewPostView: View {
   
   @State var username: String = ""
   @State var postText: String = ""
-  @State var showImagePicker = false
+  @State private var imagePickerIsVisible = false
   @State var uiImage: UIImage?
   
   let imageSize: CGFloat = 200
@@ -26,7 +26,7 @@ struct NewPostView: View {
       Form {
         TextField("Username", text: $username)
         Button("Pick image") {
-          self.showImagePicker = true
+          self.imagePickerIsVisible = true
         }
         if uiImage != nil {
           Image(uiImage: uiImage!)
@@ -45,13 +45,12 @@ struct NewPostView: View {
           self.postHandler.addPost(post: MediaPost(textBody: self.postText, userName: self.username, timestamp: Date(), uiImage: self.uiImage))
           self.presentationMode.wrappedValue.dismiss()
         }
-        .disabled(username.isEmpty && postText.isEmpty)
+        .disabled(username.isEmpty || (username.isEmpty && postText.isEmpty) || (postText.isEmpty && uiImage == nil))
       }
       .padding()
     }
-    .sheet(isPresented: $showImagePicker) {
-      // TODO: Show ImagePicker
-      Text("Replace with code to show ImagePicker")
+    .sheet(isPresented: $imagePickerIsVisible) {
+      ImagePicker(image: self.$uiImage)
     }
   }
 }
