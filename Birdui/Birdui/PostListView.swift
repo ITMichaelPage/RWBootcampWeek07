@@ -9,10 +9,42 @@
 import SwiftUI
 
 struct PostListView: View {
+  @ObservedObject private var postViewModel = PostViewModel()
+  @State var newPostViewIsVisible: Bool = false
   var body: some View {
-    // TODO: This should look exactly like the Birdie table view,
-    // but with only one button.
-    Text("Layout header, new-post button, List of posts")
+    VStack {
+      // MARK: - Header
+      VStack {
+        // MARK: - Birdui icon and centered heading
+        ZStack {
+          HStack {
+            Image("mascot_swift-badge")
+              .resizable()
+              .frame(width: 50, height: 50)
+            Spacer()
+          }
+          Text("Home")
+            .font(.title)
+        }
+        // MARK: - Create new post button
+        HStack {
+          Button(action: {
+            self.newPostViewIsVisible = true
+          }) {
+            Text("Create New Post")
+          }
+          .sheet(isPresented: $newPostViewIsVisible) {
+            NewPostView(postHandler: self.postViewModel)
+          }
+          Spacer()
+        }
+      }
+      .padding([.leading, .trailing])
+      // MARK: - List of posts
+      List(postViewModel.posts) { post in
+        PostView(post: post)
+      }
+    }
   }
 }
 
