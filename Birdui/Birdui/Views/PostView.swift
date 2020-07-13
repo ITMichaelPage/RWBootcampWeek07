@@ -21,7 +21,7 @@ struct PostView: View {
     VStack(alignment: .leading) {
       HStack {
         // MARK: - Profile image
-        Image("mascot_swift-badge")
+        Image("mascot_swift-badge", label: Text("This is a mascot swift badge"))
           .resizable()
           .frame(width: 50, height: 50)
         // MARK: - Name and timestamp

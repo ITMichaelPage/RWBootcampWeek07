@@ -18,7 +18,7 @@ struct PostListView: View {
         // MARK: - Birdui icon and centered heading
         ZStack {
           HStack {
-            Image("mascot_swift-badge")
+            Image("mascot_swift-badge", label: Text("This is a mascot swift badge"))
               .resizable()
               .frame(width: 50, height: 50)
             Spacer()
@@ -32,6 +32,8 @@ struct PostListView: View {
             self.newPostViewIsVisible = true
           }) {
             Text("Create New Post")
+            .accessibility(addTraits: .isButton)
+            .accessibility(hint: Text("This button can create a new post."))
           }
           .sheet(isPresented: $newPostViewIsVisible) {
             NewPostView(postHandler: self.postViewModel)
