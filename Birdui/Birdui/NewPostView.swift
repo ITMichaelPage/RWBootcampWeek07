@@ -12,10 +12,10 @@ struct NewPostView: View {
   var postHandler: PostViewModel
   @Environment(\.presentationMode) var presentationMode
   
-  @State var username: String = ""
-  @State var postText: String = ""
+  @State private var username: String = ""
+  @State private var postText: String = ""
   @State private var imagePickerIsVisible = false
-  @State var uiImage: UIImage?
+  @State private var uiImage: UIImage?
   
   let imageSize: CGFloat = 200
   
