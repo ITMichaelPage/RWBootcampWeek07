@@ -11,6 +11,7 @@ import SwiftUI
 struct PostView: View {
   
   let post: MediaPost
+  let imageSize: CGFloat = 100
   
   var dateFormatter: DateFormatter {
     let dateFormatter = DateFormatter()
@@ -41,8 +42,8 @@ struct PostView: View {
           Spacer()
           Image(uiImage: post.uiImage!)
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
+            .scaledToFit()
+            .frame(width: imageSize, height: imageSize)
           Spacer()
         }
       }

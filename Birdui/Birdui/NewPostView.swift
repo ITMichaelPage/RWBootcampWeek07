@@ -31,7 +31,7 @@ struct NewPostView: View {
         if uiImage != nil {
           Image(uiImage: uiImage!)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(width: imageSize, height: imageSize)
         }
         TextField("Post text", text: $postText)
