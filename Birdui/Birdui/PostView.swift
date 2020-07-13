@@ -9,6 +9,8 @@
 import SwiftUI
 
 struct PostView: View {
+  @Environment(\.colorScheme) var colorScheme
+  
   let post: MediaPost
   
   var dateFormatter: DateFormatter {
@@ -21,8 +23,10 @@ struct PostView: View {
     VStack(alignment: .leading) {
       HStack {
         // MARK: - Profile image
-        Image("mascot_swift-badge")
+        Image(uiImage: post.profileImage)
           .resizable()
+          .clipShape(Circle())
+          .overlay(Circle().stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 1))
           .frame(width: 50, height: 50)
         // MARK: - Name and timestamp
         VStack(alignment: .leading) {
@@ -49,8 +53,19 @@ struct PostView: View {
 
 struct PostView_Previews: PreviewProvider {
   static var previews: some View {
-    PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
-      userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
-      uiImage: UIImage(named: "octopus")))
+    Group {
+        PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
+          userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
+          uiImage: UIImage(named: "octopus")))
+          .previewLayout(.sizeThatFits)
+          .environment(\.colorScheme, .light)
+      
+        PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
+          userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
+          uiImage: UIImage(named: "octopus")))
+          .previewLayout(.sizeThatFits)
+          .environment(\.colorScheme, .dark)
+          .background(Color.black)
+    }
   }
 }
