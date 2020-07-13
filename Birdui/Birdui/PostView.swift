@@ -9,7 +9,6 @@
 import SwiftUI
 
 struct PostView: View {
-  @Environment(\.colorScheme) var colorScheme
   
   let post: MediaPost
   
@@ -26,7 +25,7 @@ struct PostView: View {
         Image(uiImage: post.profileImage)
           .resizable()
           .clipShape(Circle())
-          .overlay(Circle().stroke(colorScheme == .dark ? Color.white : Color.black, lineWidth: 1))
+          .overlay(Circle().stroke())
           .frame(width: 50, height: 50)
         // MARK: - Name and timestamp
         VStack(alignment: .leading) {
