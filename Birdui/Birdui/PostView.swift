@@ -23,11 +23,12 @@ struct PostView: View {
     VStack(alignment: .leading) {
       HStack {
         // MARK: - Profile image
-        Image(uiImage: post.profileImage, label: Text("This is a the user's profile image"))
+        Image(uiImage: post.profileImage)
           .resizable()
           .clipShape(Circle())
           .overlay(Circle().stroke())
           .frame(width: 50, height: 50)
+          .accessibility(label: Text("This is a the user's profile image"))
         // MARK: - Name and timestamp
         VStack(alignment: .leading) {
           Text(post.userName)
