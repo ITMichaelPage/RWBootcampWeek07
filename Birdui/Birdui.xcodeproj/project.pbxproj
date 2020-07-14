@@ -47,25 +47,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		71B1919924BD097200F8509C /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CD7798D524B040C9004D6A6B /* NewPostView.swift */,
-				CD7798D924B04C01004D6A6B /* PostView.swift */,
-				CD7798D724B04BEC004D6A6B /* PostListView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		71B1919A24BD09A500F8509C /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CD7798DB24B04C1A004D6A6B /* PostViewModel.swift */,
-				CD7798CD24AF0B23004D6A6B /* MediaPost.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		CD7798AC24AF0799004D6A6B = {
 			isa = PBXGroup;
 			children = (
@@ -88,8 +69,11 @@
 				CD7798B824AF0799004D6A6B /* AppDelegate.swift */,
 				CD7798BA24AF0799004D6A6B /* SceneDelegate.swift */,
 				CD7798DD24B05896004D6A6B /* ImagePicker.swift */,
-				71B1919A24BD09A500F8509C /* Models */,
-				71B1919924BD097200F8509C /* Views */,
+				CD7798DB24B04C1A004D6A6B /* PostViewModel.swift */,
+				CD7798CD24AF0B23004D6A6B /* MediaPost.swift */,
+				CD7798D524B040C9004D6A6B /* NewPostView.swift */,
+				CD7798D924B04C01004D6A6B /* PostView.swift */,
+				CD7798D724B04BEC004D6A6B /* PostListView.swift */,
 				CD7798BE24AF079C004D6A6B /* Assets.xcassets */,
 				CD7798C324AF079C004D6A6B /* LaunchScreen.storyboard */,
 				CD7798C624AF079C004D6A6B /* Info.plist */,
