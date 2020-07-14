@@ -10,7 +10,7 @@ import SwiftUI
 
 struct PostListView: View {
   @ObservedObject private var postViewModel = PostViewModel()
-  @State var newPostViewIsVisible: Bool = false
+  @State private var newPostViewIsVisible: Bool = false
   var body: some View {
     VStack {
       // MARK: - Header
@@ -26,25 +26,36 @@ struct PostListView: View {
           Text("Home")
             .font(.title)
         }
-        // MARK: - Create new post button
-        HStack {
-          Button(action: {
-            self.newPostViewIsVisible = true
-          }) {
-            Text("Create New Post")
-            .accessibility(addTraits: .isButton)
-            .accessibility(hint: Text("This button can create a new post."))
-          }
-          .sheet(isPresented: $newPostViewIsVisible) {
-            NewPostView(postHandler: self.postViewModel)
-          }
-          Spacer()
-        }
       }
       .padding([.leading, .trailing])
-      // MARK: - List of posts
-      List(postViewModel.posts) { post in
-        PostView(post: post)
+      ZStack {
+        // MARK: - List of posts
+        List(postViewModel.posts) { post in
+          PostView(post: post)
+        }
+        // MARK: - Create new post button
+        VStack {
+          Spacer()
+          HStack {
+            Spacer()
+            Button(action: {
+              self.newPostViewIsVisible = true
+            }) {
+              Image(systemName: "square.and.pencil")
+                .foregroundColor(.white)
+                .font(Font.title.bold())
+                .padding()
+                .accessibility(addTraits: .isButton)
+                .accessibility(hint: Text("This button can create a new post."))
+                .accessibility(label: Text("Create new post"))
+            }
+            .buttonStyle(NewPostButtonStyle())
+            .padding()
+            .sheet(isPresented: $newPostViewIsVisible) {
+              NewPostView(postHandler: self.postViewModel)
+            }
+          }
+        }
       }
     }
   }
