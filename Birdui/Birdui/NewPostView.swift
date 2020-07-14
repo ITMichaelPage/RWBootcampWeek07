@@ -12,10 +12,10 @@ struct NewPostView: View {
   var postHandler: PostViewModel
   @Environment(\.presentationMode) var presentationMode
   
-  @State var username: String = ""
-  @State var postText: String = ""
+  @State private var username: String = ""
+  @State private var postText: String = ""
   @State private var imagePickerIsVisible = false
-  @State var uiImage: UIImage?
+  @State private var uiImage: UIImage?
   
   let imageSize: CGFloat = 200
   
@@ -31,7 +31,7 @@ struct NewPostView: View {
         if uiImage != nil {
           Image(uiImage: uiImage!)
             .resizable()
-            .aspectRatio(contentMode: .fit)
+            .scaledToFit()
             .frame(width: imageSize, height: imageSize)
         }
         TextField("Post text", text: $postText)
@@ -45,7 +45,7 @@ struct NewPostView: View {
           self.postHandler.addPost(post: MediaPost(textBody: self.postText, userName: self.username, timestamp: Date(), uiImage: self.uiImage))
           self.presentationMode.wrappedValue.dismiss()
         }
-        .disabled(username.isEmpty || (username.isEmpty && postText.isEmpty) || (postText.isEmpty && uiImage == nil))
+        .disabled(username.isEmpty || (postText.isEmpty && uiImage == nil))
       }
       .padding()
     }
