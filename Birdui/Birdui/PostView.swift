@@ -9,7 +9,9 @@
 import SwiftUI
 
 struct PostView: View {
+  
   let post: MediaPost
+  let imageSize: CGFloat = 100
   
   var dateFormatter: DateFormatter {
     let dateFormatter = DateFormatter()
@@ -21,8 +23,10 @@ struct PostView: View {
     VStack(alignment: .leading) {
       HStack {
         // MARK: - Profile image
-        Image("mascot_swift-badge")
+        Image(uiImage: post.profileImage)
           .resizable()
+          .clipShape(Circle())
+          .overlay(Circle().stroke())
           .frame(width: 50, height: 50)
         // MARK: - Name and timestamp
         VStack(alignment: .leading) {
@@ -38,8 +42,8 @@ struct PostView: View {
           Spacer()
           Image(uiImage: post.uiImage!)
             .resizable()
-            .aspectRatio(contentMode: .fit)
-            .frame(width: 100, height: 100)
+            .scaledToFit()
+            .frame(width: imageSize, height: imageSize)
           Spacer()
         }
       }
@@ -49,8 +53,19 @@ struct PostView: View {
 
 struct PostView_Previews: PreviewProvider {
   static var previews: some View {
-    PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
-      userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
-      uiImage: UIImage(named: "octopus")))
+    Group {
+        PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
+          userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
+          uiImage: UIImage(named: "octopus")))
+          .previewLayout(.sizeThatFits)
+          .environment(\.colorScheme, .light)
+      
+        PostView(post: MediaPost(textBody: "Went to the Aquarium today :]",
+          userName: "Audrey", timestamp: Date(timeIntervalSinceNow: -9876),
+          uiImage: UIImage(named: "octopus")))
+          .previewLayout(.sizeThatFits)
+          .environment(\.colorScheme, .dark)
+          .background(Color.black)
+    }
   }
 }

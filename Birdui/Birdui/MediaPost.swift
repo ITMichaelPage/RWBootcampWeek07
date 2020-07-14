@@ -14,4 +14,11 @@ struct MediaPost: Identifiable {
   let userName: String
   let timestamp: Date
   let uiImage: UIImage?
+  var profileImage: UIImage {
+    if let profileImage = UIImage(named: userName.lowercased()) {
+      return profileImage
+    } else {
+      return UIImage(named: "default")!
+    }
+  }
 }
